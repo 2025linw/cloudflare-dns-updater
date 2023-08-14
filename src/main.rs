@@ -20,6 +20,10 @@ async fn get_body(url: String) -> reqwest::Result<String> {
 
 #[tokio::main]
 async fn main() {
+    let path = env::home_dir().and_then(|a| Some(a.join("/dev/cloudflare_ip_updater/.env"))).unwrap();
+
+    dotenv::from_path(path);
+
     dotenv().ok();
 
     // Verification for all .env information
