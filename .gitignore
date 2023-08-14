@@ -1,0 +1,4 @@
+# Security reasons, this is not git controlled
+.env
+
+/target
