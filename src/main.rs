@@ -18,6 +18,7 @@ async fn main() {
     let api_key = env::var("CLOUDFLARE_API_KEY").expect("Need Cloudflare API Key");
     let zone_id = env::var("CLOUDFLARE_ZONE_ID").expect("Need Cloudflare Zone ID");
     let email = env::var("CLOUDFLARE_ACC_EMAIL").expect("Need Cloudflare Account Email");
+    let domain = env::var("DOMAIN_NAME").expect("Need target domain name");
 
     // HTTP Client setup
     let client = Client::new();
@@ -44,7 +45,7 @@ async fn main() {
 
     // GET body
     let mut body = HashMap::new();
-    body.insert("name", "***REMOVED***");
+    body.insert("name", "saphynet.io");
 
     // Send request and get response
     let res = client
@@ -92,7 +93,7 @@ async fn main() {
     let body = json!(
         {
             "content": pub_ip,
-            "name": "***REMOVED***",
+            "name": domain,
             "type": "A",
             "proxied": false,
             "comment": datetime.to_string(),
