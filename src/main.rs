@@ -73,9 +73,9 @@ async fn main() {
         }
     };
 
-    // 
+    //
     // PUT request
-    // 
+    //
 
     // API URL
     let put_api_url = format!("https://api.cloudflare.com/client/v4/zones/{}/dns_records/{}", zone_id, id);
@@ -87,7 +87,7 @@ async fn main() {
     headers.insert("Authorization", format!("Bearer {}", api_key).parse().unwrap());
 
     // Comment for last update date and time
-    let datetime = Local::now().format("Updated on %F %R");
+    let datetime = Local::now().format("Updated on %F at %R");
 
     // PUT body
     let body = json!(
@@ -99,7 +99,7 @@ async fn main() {
             "comment": datetime.to_string(),
         }
     );
-    
+
     // Send request and get response
     let res = client
         .put(put_api_url)
