@@ -15,10 +15,34 @@ async fn main() {
     dotenv().ok();
 
     // Verification for all .env information
-    let api_key = env::var("CLOUDFLARE_API_KEY").expect("Need Cloudflare API Key");
-    let zone_id = env::var("CLOUDFLARE_ZONE_ID").expect("Need Cloudflare Zone ID");
-    let email = env::var("CLOUDFLARE_ACC_EMAIL").expect("Need Cloudflare Account Email");
-    let domain = env::var("DOMAIN_NAME").expect("Need target domain name");
+    let api_key = match env::var("CLOUDFLARE_API_KEY") {
+        Ok(string) => string,
+        Err(_) => {
+            eprintln!("Unable to get Cloudflare API Key");
+            return;
+        }
+    };
+    let zone_id = match env::var("CLOUDFLARE_ZONE_ID") {
+        Ok(string) => string,
+        Err(_) => {
+            eprintln!("Unable to get Cloudflare Zone ID");
+            return;
+        }
+    };
+    let email = match env::var("CLOUDFLARE_ACC_EMAIL") {
+        Ok(string) => string,
+        Err(_) => {
+            eprintln!("Unable to get Cloudflare Account Email");
+            return;
+        }
+    };
+    let domain = match env::var("DOMAIN_NAME") {
+        Ok(string) => string,
+        Err(_) => {
+            eprintln!("Unable to get Domain Name");
+            return;
+        }
+    };
 
     // HTTP Client setup
     let client = Client::new();
