@@ -69,7 +69,7 @@ async fn main() {
 
     // GET body
     let mut body = HashMap::new();
-    body.insert("name", "***REMOVED***");
+    body.insert("name", "saphynet.io");
 
     // Send request and get response
     let res = client
@@ -119,7 +119,7 @@ async fn main() {
             "content": pub_ip,
             "name": domain,
             "type": "A",
-            "proxied": false,
+            "proxied": true,
             "comment": datetime.to_string(),
         }
     );
