@@ -1,6 +1,11 @@
 # Security reasons, this is not git controlled
 .env
 
+# Prevent BFG logs and related files from being VC'd
+.git.bfg-report/*
+remove.txt
+
+# Binary location
 /target
 
 *.log
