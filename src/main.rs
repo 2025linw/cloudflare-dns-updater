@@ -5,7 +5,7 @@ use std::{env, collections::HashMap};
 
 use dotenv::dotenv;
 use reqwest::{*, header::HeaderMap};
-use serde_json::json;
+use serde_json::{json, Value};
 use chrono::Local;
 
 const IP_SRC: &str = "http://whatismyip.akamai.com";
@@ -69,7 +69,7 @@ async fn main() {
 
     // GET body
     let mut body = HashMap::new();
-    body.insert("name", "saphynet.io");
+    body.insert("name", &domain);
 
     // Send request and get response
     let res = client
@@ -79,23 +79,40 @@ async fn main() {
         .send()
         .await.unwrap();
 
-    // Get the response body
+    // Get the response body and store as json
     let res_body = res.text().await.unwrap();
+    let res_json: Value = serde_json::from_str(&res_body).unwrap();
 
-    // Get the index of the start and end of the id
-    let start = res_body.find("id\":\"").unwrap() + 5;
-    let end = res_body.find("\",\"zone_id\"").unwrap() - start;
+    // Check success
+    if let Value::Bool(false) = res_json["success"] {
+        eprintln!("Unable to get from Cloudflare");
+        return
+    }
 
-    // Extract the DNS entry ID
-    let id = match (match res_body.split_at(start) {
-        (_, bot) => {
-            bot.to_string()
-        }
-    }).split_at(end) {
-        (top, _) => {
-            top.to_string()
-        }
+    let results = if let Value::Array(results) = &res_json["result"] {
+        results
+    } else {
+        eprintln!("Unable to find any DNS entries");
+        return;
     };
+
+    let mut id = String::new();
+    for result in results {
+        match (&result["name"], &result["id"]) {
+            (Value::String(name), Value::String(for_id)) => {
+                if name == &domain {
+                    id = for_id.to_string();
+                    break;
+                }
+            }
+            _ => continue,
+        }
+    }
+
+    if id.is_empty() {
+        eprintln!("Unable to find entry with domain name");
+        return;
+    }
 
     //
     // PUT request
