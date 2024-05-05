@@ -11,7 +11,7 @@ There is no guarentee for the security of this program and it is made only to ac
 1. `git clone` repository
 2. Make a copy of `.env` and enter details.
 3. Run `cargo b -r`
-4. Create a `crontab` entry copying the format shown in the ![crontab] section
+4. Create a `crontab` entry copying the format shown in the [`crontab` Setup] section
 
 ### .env Setup
 
