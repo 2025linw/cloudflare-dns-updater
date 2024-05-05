@@ -15,6 +15,12 @@ There is no guarentee for the security of this program and it is made only to ac
 
 ### .env Setup
 
+```
+CLOUDFLARE_API_KEY="<API KEY>"
+CLOUDFLARE_ZONE_ID="<ZONE ID>"
+CLOUDFLARE_ACC_EMAIL="<EMAIL>"
+DOMAIN_NAME="<DOMAIN NAME>"
+```
 
 ### Crontab Setup
 
