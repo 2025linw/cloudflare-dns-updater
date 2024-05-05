@@ -18,3 +18,7 @@ There is no guarentee for the security of this program and it is made only to ac
 
 ### Crontab Setup
 
+1. Setup automated updating
+*  `0 * * * * cd <path to repo> && ./target/release/cloudflare_dns_updater >> <path to log folder>/cloudflare-dns-updater.log`
+2. Setup autoclearing of logs every month
+* `0 * 1 * * cd <path to log folder> && > cloudflare-dns-updater.log`
