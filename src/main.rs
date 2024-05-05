@@ -150,5 +150,5 @@ async fn main() {
         .await.unwrap();
 
     // Output status
-    println!("Status: {}", res.status());
+    println!("{} with Status: {}", datetime.to_string(), res.status());
 }
