@@ -128,7 +128,7 @@ async fn main() {
     headers.insert("Authorization", format!("Bearer {}", api_key).parse().unwrap());
 
     // Comment for last update date and time
-    let datetime = Local::now().format("Updated on %F at %R");
+    let datetime = Local::now().format("Updated on %Y-%m-%d at %H:%M:%S");
 
     // PUT body
     let body = json!(
