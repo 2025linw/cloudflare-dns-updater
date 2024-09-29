@@ -10,7 +10,7 @@ There is no guarentee for the security of this program and it is made only to ac
 
 1. `git clone` repository
 2. Make a copy of `.env` and enter details.
-3. Run `cargo b -r`
+3. Build release version of updater with `cargo b -r`
 4. Create a `crontab` entry copying the format shown in the [crontab](#Crontab-Setup) section
 
 ### .env Setup
@@ -26,5 +26,7 @@ DOMAIN_NAME="<DOMAIN NAME>"
 
 1. Open `crontab` editing using `crontab -e`
 2. Add the following entries
-    * Setup automated updating: `0 * * * * cd <path to repo> && ./target/release/cloudflare_dns_updater >> <path to log folder>/cloudflare-dns-updater.log`
-    * Setup autoclearing of logs every month: `0 * 1 * * cd <path to log folder> && > cloudflare-dns-updater.log`
+   1. Setup automated updating:
+      * `0 * * * * cd /path/to/repo/cloudflare-dns-updater && ./target/release/cloudflare_dns_updater >> /path/to/log/folder/cloudflare-dns-updater.log`
+   2. Setup autoclearing of logs every month:
+      * `0 * 1 * * cd /path/to/log/folder && > cloudflare-dns-updater.log`
