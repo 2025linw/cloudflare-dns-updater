@@ -24,7 +24,7 @@ DOMAIN_NAME="<DOMAIN NAME>"
 
 ### Crontab Setup
 
-1. Setup automated updating
-*  `0 * * * * cd <path to repo> && ./target/release/cloudflare_dns_updater >> <path to log folder>/cloudflare-dns-updater.log`
-2. Setup autoclearing of logs every month
-* `0 * 1 * * cd <path to log folder> && > cloudflare-dns-updater.log`
+1. Open `crontab` editing using `crontab -e`
+2. Add the following entries
+    * Setup automated updating: `0 * * * * cd <path to repo> && ./target/release/cloudflare_dns_updater >> <path to log folder>/cloudflare-dns-updater.log`
+    * Setup autoclearing of logs every month: `0 * 1 * * cd <path to log folder> && > cloudflare-dns-updater.log`
