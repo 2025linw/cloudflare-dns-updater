@@ -136,7 +136,7 @@ async fn main() {
             "content": pub_ip,
             "name": domain,
             "type": "A",
-            "proxied": true,
+            "proxied": false,
             "comment": datetime.to_string(),
         }
     );
