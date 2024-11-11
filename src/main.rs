@@ -8,11 +8,13 @@ use reqwest::{*, header::HeaderMap};
 use serde_json::{json, Value};
 use chrono::Local;
 
-const IP_SRC: &str = "http://whatismyip.akamai.com";
+const IP_SRC: &str = "http://icanhazip.com";
 
 #[tokio::main]
 async fn main() {
     dotenv().ok();
+
+    let flags: Vec<String> = env::args().collect();
 
     // Verification for all .env information
     let api_key = match env::var("CLOUDFLARE_API_KEY") {
@@ -53,6 +55,12 @@ async fn main() {
         .await.unwrap()
         .text()
         .await.unwrap();
+
+    if flags.contains(&"-t".to_string()) {
+        println!("{:?}", pub_ip.trim());
+
+        return
+    }
 
     //
     // GET Request
