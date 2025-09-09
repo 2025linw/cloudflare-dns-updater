@@ -1,6 +1,6 @@
 # Cloudflare DNS Updater
 
-This programs is designed to be used with Cloudflare to update the IP address for an DNS entry pointed at a device that has a dynamically assigned IP address.
+This programs is designed to be used with Cloudflare to update the IP address for an DNS entry pointed at a device that has a dynamically assigned IP address by an ISP.
 
 There is no guarantee for the security of this program and it is made only to achieve the goal of updating the IP for an entry.
 
