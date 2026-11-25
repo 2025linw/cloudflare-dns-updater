@@ -31,7 +31,7 @@ async fn main() {
             return;
         }
     };
-    let email = match env::var("CLOUDFLARE_ACC_EMAIL") {
+    let email = match env::var("CLOUDFLARE_EMAIL") {
         Ok(string) => string,
         Err(_) => {
             eprintln!("Unable to get Cloudflare Account Email");
@@ -44,6 +44,11 @@ async fn main() {
             eprintln!("Unable to get Domain Name");
             return;
         }
+    };
+
+    let proxied = match env::var("CLOUDFLARE_PROXIED") {
+        Ok(bool_str) => bool_str.parse::<bool>().unwrap_or(true),
+        Err(_) => true,
     };
 
     // HTTP Client setup
@@ -144,7 +149,7 @@ async fn main() {
             "content": pub_ip,
             "name": domain,
             "type": "A",
-            "proxied": false,
+            "proxied": proxied,
             "comment": datetime.to_string(),
         }
     );
